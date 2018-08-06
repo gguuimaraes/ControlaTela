@@ -10,8 +10,8 @@
 				rendered="#{telaController.telaModel.id != null}" />
 
 			<p:outputLabel value="URL" for="txtUrl" />
-			<p:inputText id="txtUrl" style="width:300px" maxlength="255" value="#{telaController.telaModel.url}"
-				required="true" requiredMessage="A URL é de preenchimento obrigatório" />
+			<p:inputText id="txtUrl" style="width:300px" maxlength="255" value="#{telaController.telaModel.url}" required="true"
+				requiredMessage="A URL é de preenchimento obrigatório" />
 
 			<p:outputLabel value="Tempo (Segundos)" for="txtTempo" />
 			<p:inputText id="txtTempo" style="width:150px" value="#{telaController.telaModel.segundos}" required="true"
@@ -23,7 +23,9 @@
 				update="form" />
 
 			<p:spacer />
-			<p:messages showDetail="false" autoUpdate="true" closable="true" severity="error" />
+			<p:messages showDetail="false" closable="true" severity="error">
+				<p:autoUpdate />
+			</p:messages>
 
 		</h:panelGrid>
 
