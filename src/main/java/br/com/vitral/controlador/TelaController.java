@@ -63,6 +63,7 @@ public class TelaController implements Serializable {
 
 	public void onRowEdit(RowEditEvent event) {
 		telaDao.salvar((TelaModel) event.getObject());
+		System.out.println(event.getObject());
 		Uteis.MensagemInfo("Tela alterada com sucesso");
 	}
 

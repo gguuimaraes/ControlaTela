@@ -44,5 +44,12 @@ public class TelaModel implements Serializable {
 	public void setPosicao(int posicao) {
 		this.posicao = posicao;
 	}
+
+	@Override
+	public String toString() {
+		return "TelaModel [id=" + id + ", url=" + url + ", segundos=" + segundos + ", posicao=" + posicao + "]";
+	}
+	
+	
 	
 }
