@@ -38,6 +38,8 @@ public class TelaController implements Serializable {
 
 	public void cadastrar() {
 		telaModel = new TelaModel();
+		init();
+		telaModel.setPosicao(telas.size() + 1);
 		PrimeFaces.current().executeScript("PF('dialogCadastro').show();");
 	}
 
@@ -55,6 +57,7 @@ public class TelaController implements Serializable {
 	}
 
 	public List<TelaModel> getTelas() {
+		init();
 		return telas;
 	}
 
@@ -73,5 +76,13 @@ public class TelaController implements Serializable {
 
 	public void setTelaModel(TelaModel telaModel) {
 		this.telaModel = telaModel;
+	}
+	
+	public void subir(int posicao) {
+		telaDao.subir(posicao);
+	}
+	
+	public void descer(int posicao) {
+		telaDao.descer(posicao);
 	}
 }

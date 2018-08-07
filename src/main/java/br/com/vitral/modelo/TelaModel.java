@@ -11,6 +11,7 @@ public class TelaModel implements Serializable {
 	private Integer id;
 	private String url;
 	private Integer segundos;
+	private int posicao;
 
 	public Integer getId() {
 		return id;
@@ -34,10 +35,14 @@ public class TelaModel implements Serializable {
 
 	public void setSegundos(Integer segundos) {
 		this.segundos = segundos;
+	}	
+
+	public int getPosicao() {
+		return posicao;
 	}
 
-	@Override
-	public String toString() {
-		return "TelaModel [id=" + id + ", url=" + url + ", segundos=" + segundos + "]";
+	public void setPosicao(int posicao) {
+		this.posicao = posicao;
 	}
+	
 }

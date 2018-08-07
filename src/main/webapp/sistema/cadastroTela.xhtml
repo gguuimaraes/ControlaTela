@@ -9,6 +9,9 @@
 			<p:inputText id="txtId" value="#{telaController.telaModel.id}" style="width:50px" readonly="true"
 				rendered="#{telaController.telaModel.id != null}" />
 
+			<p:outputLabel value="Posição" for="txtPosicao" />
+			<p:inputText id="txtPosicao" value="#{telaController.telaModel.posicao}" style="width:50px" readonly="true" />
+
 			<p:outputLabel value="URL" for="txtUrl" />
 			<p:inputText id="txtUrl" style="width:300px" maxlength="255" value="#{telaController.telaModel.url}" required="true"
 				requiredMessage="A URL é de preenchimento obrigatório" />

@@ -19,12 +19,13 @@
 
 		<h:form id="form">
 			<p:growl id="msgs" showDetail="true" />
-			<p:dataTable id="telas" var="tela" value="#{telaController.telas}" editable="true" emptyMessage="Nenhum registro.">
+			<p:dataTable id="telas" var="tela" value="#{telaController.telas}" editable="true" emptyMessage="Nenhum registro."
+				rowIndexVar="rowIndex">
 
 				<p:ajax event="rowEdit" listener="#{telaController.onRowEdit}" update=":form:msgs" />
 				<p:ajax event="rowEditCancel" listener="#{telaController.onRowCancel}" update=":form:msgs" />
 
-				<p:column headerText="Id">
+				<!-- <p:column headerText="Id" style="width: 5%">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{tela.id}" />
@@ -33,6 +34,18 @@
 							<p:inputText value="#{tela.id}" style="width:100%" />
 						</f:facet>
 					</p:cellEditor>
+				</p:column> -->
+
+				<p:column headerText="Posição" style="width: 6%">
+					<h:outputText value="#{tela.posicao}" />
+					<p:commandLink style="float: right" rendered="#{rowIndex > 0}"
+						actionListener="#{telaController.subir(tela.posicao)}" update="form">
+						<h:outputText class="fa fa-fw fa-arrow-up" />
+					</p:commandLink>
+					<p:commandLink style="float: right" rendered="#{telaController.telas.size() - 1 > rowIndex}"
+						actionListener="#{telaController.descer(tela.posicao)}" update="form">
+						<h:outputText class="fa fa-fw fa-arrow-down" />
+					</p:commandLink>
 				</p:column>
 
 				<p:column headerText="URL">
@@ -47,7 +60,7 @@
 					</p:cellEditor>
 				</p:column>
 
-				<p:column headerText="Tempo em segundos">
+				<p:column headerText="Tempo (segundos)" style="width: 8%">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{tela.segundos}" />

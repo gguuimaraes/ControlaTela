@@ -26,11 +26,13 @@ public class TelaDao implements Serializable {
 			tela = new Tela();
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
+			tela.setPosicao(telaModel.getPosicao());
 			entityManager.persist(tela);
 		} else {
 			tela = entityManager.find(Tela.class, telaModel.getId());
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
+			tela.setPosicao(telaModel.getPosicao());
 			entityManager.merge(tela);
 		}
 	}
@@ -47,6 +49,7 @@ public class TelaDao implements Serializable {
 			telaModel.setId(t.getId());
 			telaModel.setUrl(t.getUrl());
 			telaModel.setSegundos(t.getSegundos());
+			telaModel.setPosicao(t.getPosicao());
 			telasModel.add(telaModel);
 		}
 		return telasModel;
@@ -56,4 +59,27 @@ public class TelaDao implements Serializable {
 		entityManager = Uteis.JpaEntityManager();
 		entityManager.remove(entityManager.find(Tela.class, id));
 	}
+
+	public void subir(int posicao) {
+		trocarPosicao(consultarPorPosicao(posicao), consultarPorPosicao(posicao - 1));
+	}
+
+	public void descer(int posicao) {
+		trocarPosicao(consultarPorPosicao(posicao), consultarPorPosicao(posicao + 1));
+	}
+	
+	private void trocarPosicao(Tela tela, Tela outra) {
+		int aux = outra.getPosicao();
+		outra.setPosicao(tela.getPosicao());
+		tela.setPosicao(aux);
+		entityManager = Uteis.JpaEntityManager();
+		entityManager.merge(tela);
+		entityManager.merge(outra);
+	}
+
+	private Tela consultarPorPosicao(int posicao) {
+		return (Tela) Uteis.JpaEntityManager().createNamedQuery("Tela.findPorPosicao").setParameter("posicao", posicao)
+				.getSingleResult();
+	}
+
 }

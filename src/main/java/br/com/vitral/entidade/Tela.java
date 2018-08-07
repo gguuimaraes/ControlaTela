@@ -11,15 +11,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import br.com.vitral.modelo.UsuarioModel;
-
 @Table(name = "tela")
 @Entity
 
 @NamedQueries({
 
 		@NamedQuery(name = "Tela.findTela", query = "SELECT t FROM Tela t WHERE t.url = :url"),
-		@NamedQuery(name = "Tela.findAll", query = "SELECT t FROM Tela t")
+		@NamedQuery(name = "Tela.findAll", query = "SELECT t FROM Tela t ORDER BY t.posicao"),
+		@NamedQuery(name = "Tela.findPorPosicao", query = "SELECT t FROM Tela t WHERE t.posicao = :posicao")
 
 })
 public class Tela implements Serializable {
@@ -36,6 +35,9 @@ public class Tela implements Serializable {
 
 	@Column(name = "segundos")
 	private Integer segundos;
+	
+	@Column(name = "posicao")
+	private int posicao;
 
 	public Integer getId() {
 		return id;
@@ -59,5 +61,13 @@ public class Tela implements Serializable {
 
 	public void setSegundos(Integer segundos) {
 		this.segundos = segundos;
+	}
+
+	public int getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(int posicao) {
+		this.posicao = posicao;
 	}
 }
