@@ -3,12 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html">
 
-<body>
+<h:head>
+	<h:outputStylesheet library="css" name="default.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/imagens/favicon.ico" />
+	<title>Controla Tela</title>
+</h:head>
 
-	<h:head>
-		<h:outputStylesheet library="css" name="default.css" />
-	</h:head>
-
+<h:body>
 	<div id="header">
 		<ui:include src="header.xhtml" />
 	</div>
@@ -20,5 +21,5 @@
 	<div id="footer">
 		<ui:include src="footer.xhtml" />
 	</div>
-</body>
+</h:body>
 </html>
