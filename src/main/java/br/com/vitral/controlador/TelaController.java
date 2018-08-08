@@ -53,7 +53,7 @@ public class TelaController implements Serializable {
 
 	public void excluir(TelaModel telaModel) {
 		telaDao.remover(telaModel.getId());
-		telas.remove(telaModel);
+		init();
 	}
 
 	public List<TelaModel> getTelas() {

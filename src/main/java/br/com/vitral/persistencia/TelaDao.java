@@ -58,6 +58,11 @@ public class TelaDao implements Serializable {
 	public void remover(int id) {
 		entityManager = Uteis.JpaEntityManager();
 		entityManager.remove(entityManager.find(Tela.class, id));
+		List<Tela> l = entityManager.createNamedQuery("Tela.findAll").getResultList();
+		if (l.size() == 1) {
+			l.get(0).setPosicao(1);
+			entityManager.merge(l.get(0));
+		}
 	}
 
 	public void subir(int posicao) {
@@ -67,7 +72,7 @@ public class TelaDao implements Serializable {
 	public void descer(int posicao) {
 		trocarPosicao(consultarPorPosicao(posicao), consultarPorPosicao(posicao + 1));
 	}
-	
+
 	private void trocarPosicao(Tela tela, Tela outra) {
 		int aux = outra.getPosicao();
 		outra.setPosicao(tela.getPosicao());

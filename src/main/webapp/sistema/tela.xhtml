@@ -10,7 +10,7 @@
 <ui:composition template="/template/layoutBase.xhtml">
 
 	<ui:define name="content">
-		<p:commandButton icon="ui-icon-plus" actionListener="#{telaController.cadastrar}" value="Cadastrar" ajax="true"
+		<p:commandButton icon="fa fa-fw fa-plus" actionListener="#{telaController.cadastrar}" value="Cadastrar" ajax="true"
 			update="dialogCadastro" style="margin-bottom: 10px" />
 
 		<p:dialog header="Cadastro Tela" id="dialogCadastro" widgetVar="dialogCadastro" modal="true">
@@ -37,15 +37,17 @@
 				</p:column> -->
 
 				<p:column headerText="Posição" style="width: 6%">
-					<h:outputText value="#{tela.posicao}" />
-					<p:commandLink actionListener="#{telaController.subir(tela.posicao)}" update=":form" style="float: right"
-						rendered="#{rowIndex > 0}">
-						<h:outputText class="fa fa-fw fa-arrow-up" />
-					</p:commandLink>
-					<p:commandLink actionListener="#{telaController.descer(tela.posicao)}"
-						rendered="#{telaController.telas.size() - 1 > rowIndex}" update=":form" style="float: right">
-						<h:outputText class="fa fa-fw fa-arrow-down" />
-					</p:commandLink>
+					<div style="height: 100%; width: 100%">
+						<h:outputText value="#{tela.posicao}" />
+						<p:commandLink title="Subir" actionListener="#{telaController.subir(tela.posicao)}" update=":form"
+							style="float: right" rendered="#{rowIndex > 0}">
+							<h:outputText class="fa fa-fw fa-arrow-up" />
+						</p:commandLink>
+						<p:commandLink title="Descer" actionListener="#{telaController.descer(tela.posicao)}"
+							rendered="#{telaController.telas.size() - 1 > rowIndex}" update=":form" style="float: right">
+							<h:outputText class="fa fa-fw fa-arrow-down" />
+						</p:commandLink>
+					</div>
 				</p:column>
 
 				<p:column headerText="URL">
@@ -55,7 +57,7 @@
 						</f:facet>
 						<f:facet name="input">
 							<p:inputText value="#{tela.url}" maxlength="255" required="true"
-								requiredMessage="A URL é de preenchimento obrigatório" style="width:100%" />
+								requiredMessage="A URL é de preenchimento obrigatório" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
@@ -66,23 +68,21 @@
 							<h:outputText value="#{tela.segundos}" />
 						</f:facet>
 						<f:facet name="input">
-							<p:inputText value="#{tela.segundos}" required="true" requiredMessage="O tempo é de preenchimento obrigatório"
-								style="width:100%" />
+							<p:inputText value="#{tela.segundos}" required="true" requiredMessage="O tempo é de preenchimento obrigatório" />
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
 
-				<p:column style="width:32px">
-					<p:rowEditor />
+				<p:column styleClass="colicone coleditar">
+					<p:rowEditor editTitle="Editar" cancelTitle="Cancelar" saveTitle="Salvar" />
 				</p:column>
 
-				<p:column style="width:16px">
-					<p:commandLink actionListener="#{telaController.excluir(tela)}" update=":form">
+				<p:column styleClass="colicone colexcluir">
+					<p:commandLink title="Excluir" actionListener="#{telaController.excluir(tela)}" update=":form">
 						<h:outputText class="ui-icon ui-icon-trash" />
 					</p:commandLink>
 				</p:column>
 			</p:dataTable>
-
 		</h:form>
 
 	</ui:define>
