@@ -39,11 +39,11 @@
 				<p:column headerText="Posição" style="width: 6%">
 					<h:outputText value="#{tela.posicao}" />
 					<p:commandLink actionListener="#{telaController.subir(tela.posicao)}" update=":form" style="float: right"
-						rendered="#{rowIndex > 0 and not telaController.editing}">
+						rendered="#{rowIndex > 0}">
 						<h:outputText class="fa fa-fw fa-arrow-up" />
 					</p:commandLink>
 					<p:commandLink actionListener="#{telaController.descer(tela.posicao)}"
-						rendered="#{telaController.telas.size() - 1 > rowIndex and not telaController.editing}" update=":form" style="float: right">
+						rendered="#{telaController.telas.size() - 1 > rowIndex}" update=":form" style="float: right">
 						<h:outputText class="fa fa-fw fa-arrow-down" />
 					</p:commandLink>
 				</p:column>
