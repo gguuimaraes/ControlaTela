@@ -79,6 +79,7 @@ public class UsuarioController implements Serializable {
 
 	public void onRowEdit(RowEditEvent event) {
 		usuarioDao.salvar((UsuarioModel) event.getObject());
+		System.out.println((UsuarioModel) event.getObject());
 		Uteis.MensagemInfo("Usuário alterado com sucesso");
 	}
 

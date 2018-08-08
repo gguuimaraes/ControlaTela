@@ -19,7 +19,8 @@
 
 		<h:form id="form">
 			<p:growl id="msgs" showDetail="true" />
-			<p:dataTable id="telas" var="tela" value="#{telaController.telas}" editable="true" emptyMessage="Nenhum registro.">
+			<p:dataTable id="telas" var="tela" value="#{telaController.telas}" editable="true" emptyMessage="Nenhum registro."
+				rowIndexVar="rowIndex">
 
 				<p:ajax event="rowEdit" listener="#{telaController.onRowEdit}" update=":form:msgs" />
 				<p:ajax event="rowEditCancel" listener="#{telaController.onRowCancel}" update=":form:msgs" />
@@ -35,24 +36,17 @@
 					</p:cellEditor>
 				</p:column> -->
 
-				<!-- <p:column headerText="Posição" style="width: 6%">
-					<p:cellEditor>
-						<f:facet name="output">
-							<h:outputText value="#{tela.posicao}" />
-							<p:commandLink style="float: right" rendered="#{rowIndex > 0}"
-								actionListener="#{telaController.subir(tela.posicao)}" update="form">
-								<h:outputText class="fa fa-fw fa-arrow-up" />
-							</p:commandLink>
-							<p:commandLink style="float: right" rendered="#{telaController.telas.size() - 1 > rowIndex}"
-								actionListener="#{telaController.descer(tela.posicao)}" update="form">
-								<h:outputText class="fa fa-fw fa-arrow-down" />
-							</p:commandLink>
-						</f:facet>
-						<f:facet name="input">
-							<h:outputText value="#{tela.posicao}" />
-						</f:facet>
-					</p:cellEditor>
-				</p:column> -->
+				<p:column headerText="Posição" style="width: 6%">
+					<h:outputText value="#{tela.posicao}" />
+					<p:commandLink actionListener="#{telaController.subir(tela.posicao)}" update=":form" style="float: right"
+						rendered="#{rowIndex > 0 and not telaController.editing}">
+						<h:outputText class="fa fa-fw fa-arrow-up" />
+					</p:commandLink>
+					<p:commandLink actionListener="#{telaController.descer(tela.posicao)}"
+						rendered="#{telaController.telas.size() - 1 > rowIndex and not telaController.editing}" update=":form" style="float: right">
+						<h:outputText class="fa fa-fw fa-arrow-down" />
+					</p:commandLink>
+				</p:column>
 
 				<p:column headerText="URL">
 					<p:cellEditor>

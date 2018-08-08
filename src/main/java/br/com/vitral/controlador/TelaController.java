@@ -30,7 +30,7 @@ public class TelaController implements Serializable {
 
 	@Produces
 	private List<TelaModel> telas;
-
+	
 	@PostConstruct
 	public void init() {
 		telas = telaDao.listar();
@@ -57,13 +57,12 @@ public class TelaController implements Serializable {
 	}
 
 	public List<TelaModel> getTelas() {
-		init();
 		return telas;
 	}
 
+
 	public void onRowEdit(RowEditEvent event) {
 		telaDao.salvar((TelaModel) event.getObject());
-		System.out.println(event.getObject());
 		Uteis.MensagemInfo("Tela alterada com sucesso");
 	}
 
@@ -78,12 +77,15 @@ public class TelaController implements Serializable {
 	public void setTelaModel(TelaModel telaModel) {
 		this.telaModel = telaModel;
 	}
-	
+		
 	public void subir(int posicao) {
 		telaDao.subir(posicao);
+		init();
 	}
 	
 	public void descer(int posicao) {
 		telaDao.descer(posicao);
+		init();
 	}
+
 }
