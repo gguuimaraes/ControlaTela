@@ -2,8 +2,6 @@ package br.com.vitral.modelo;
 
 import java.io.Serializable;
 
-import br.com.vitral.entidade.Usuario.TipoUsuario;
-
 public class TelaModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;

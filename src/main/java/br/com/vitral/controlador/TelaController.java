@@ -30,7 +30,7 @@ public class TelaController implements Serializable {
 
 	@Produces
 	private List<TelaModel> telas;
-	
+
 	@PostConstruct
 	public void init() {
 		telas = telaDao.listar();
@@ -48,7 +48,7 @@ public class TelaController implements Serializable {
 		init();
 		this.telaModel = new TelaModel();
 		PrimeFaces.current().executeScript("PF('dialogCadastro').hide();");
-		Uteis.MensagemInfo("Tela cadastrada com sucesso");
+		Uteis.messageInformation("Tela cadastrada com sucesso");
 	}
 
 	public void excluir(TelaModel telaModel) {
@@ -60,14 +60,13 @@ public class TelaController implements Serializable {
 		return telas;
 	}
 
-
 	public void onRowEdit(RowEditEvent event) {
 		telaDao.salvar((TelaModel) event.getObject());
-		Uteis.MensagemInfo("Tela alterada com sucesso");
+		Uteis.messageInformation("Tela alterada com sucesso");
 	}
 
-	public void onRowCancel(RowEditEvent event) {
-		Uteis.MensagemInfo("Operação cancelada");
+	public void onRowCancel() {
+		Uteis.messageInformation("Operação cancelada");
 	}
 
 	public TelaModel getTelaModel() {
@@ -77,12 +76,12 @@ public class TelaController implements Serializable {
 	public void setTelaModel(TelaModel telaModel) {
 		this.telaModel = telaModel;
 	}
-		
+
 	public void subir(int posicao) {
 		telaDao.subir(posicao);
 		init();
 	}
-	
+
 	public void descer(int posicao) {
 		telaDao.descer(posicao);
 		init();

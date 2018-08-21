@@ -19,7 +19,7 @@ public class IndexController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Produces
-	List<TelaModel> telas;
+	private List<TelaModel> telas;
 
 	@Inject
 	TelaDao telaDao;
@@ -30,7 +30,7 @@ public class IndexController implements Serializable {
 	@PostConstruct
 	private void init() {
 		telas = telaDao.listar();
-		if (telas.size() > 0) {
+		if (!telas.isEmpty()) {
 			telaAtual = telas.get(0);
 			posicao = 0;
 		}
@@ -43,7 +43,7 @@ public class IndexController implements Serializable {
 		} else {
 			posicao = 0;
 		}
-		if (telas.size() > 0) {
+		if (!telas.isEmpty()) {
 			telaAtual = telas.get(posicao);
 		}
 	}

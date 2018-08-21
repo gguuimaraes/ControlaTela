@@ -18,29 +18,29 @@ public class TelaDao implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject
 	Tela tela;
-	EntityManager entityManager;
+	transient EntityManager em;
 
 	public void salvar(TelaModel telaModel) {
-		entityManager = Uteis.JpaEntityManager();
+		em = Uteis.getEntityManager();
 		if (telaModel.getId() == null) {
 			tela = new Tela();
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
 			tela.setPosicao(telaModel.getPosicao());
-			entityManager.persist(tela);
+			em.persist(tela);
 		} else {
-			tela = entityManager.find(Tela.class, telaModel.getId());
+			tela = em.find(Tela.class, telaModel.getId());
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
 			tela.setPosicao(telaModel.getPosicao());
-			entityManager.merge(tela);
+			em.merge(tela);
 		}
 	}
 
 	public List<TelaModel> listar() {
-		List<TelaModel> telasModel = new ArrayList<TelaModel>();
-		entityManager = Uteis.JpaEntityManager();
-		Query query = entityManager.createNamedQuery("Tela.findAll");
+		List<TelaModel> telasModel = new ArrayList<>();
+		em = Uteis.getEntityManager();
+		Query query = em.createNamedQuery("Tela.findAll");
 		@SuppressWarnings("unchecked")
 		Collection<Tela> telas = (Collection<Tela>) query.getResultList();
 		TelaModel telaModel = null;
@@ -56,12 +56,12 @@ public class TelaDao implements Serializable {
 	}
 
 	public void remover(int id) {
-		entityManager = Uteis.JpaEntityManager();
-		entityManager.remove(entityManager.find(Tela.class, id));
-		List<Tela> l = entityManager.createNamedQuery("Tela.findAll").getResultList();
+		em = Uteis.getEntityManager();
+		em.remove(em.find(Tela.class, id));
+		List<Tela> l = em.createNamedQuery("Tela.findAll").getResultList();
 		if (l.size() == 1) {
 			l.get(0).setPosicao(1);
-			entityManager.merge(l.get(0));
+			em.merge(l.get(0));
 		}
 	}
 
@@ -77,13 +77,13 @@ public class TelaDao implements Serializable {
 		int aux = outra.getPosicao();
 		outra.setPosicao(tela.getPosicao());
 		tela.setPosicao(aux);
-		entityManager = Uteis.JpaEntityManager();
-		entityManager.merge(tela);
-		entityManager.merge(outra);
+		em = Uteis.getEntityManager();
+		em.merge(tela);
+		em.merge(outra);
 	}
 
 	private Tela consultarPorPosicao(int posicao) {
-		return (Tela) Uteis.JpaEntityManager().createNamedQuery("Tela.findPorPosicao").setParameter("posicao", posicao)
+		return (Tela) Uteis.getEntityManager().createNamedQuery("Tela.findPorPosicao").setParameter("posicao", posicao)
 				.getSingleResult();
 	}
 
