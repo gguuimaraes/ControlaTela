@@ -3,14 +3,15 @@ package br.com.vitral.controlador;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.vitral.modelo.TelaModel;
-import br.com.vitral.persistencia.TelaDao;
+import br.com.vitral.modelo.TVModel;
+import br.com.vitral.modelo.TelaTVModel;
+import br.com.vitral.persistencia.TVDao;
 
 @Named(value = "indexController")
 @SessionScoped
@@ -19,25 +20,33 @@ public class IndexController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Produces
-	private List<TelaModel> telas;
+	private List<TelaTVModel> telas;
 
 	@Inject
-	TelaDao telaDao;
+	TVDao tvDao;
 
-	TelaModel telaAtual;
+	TVModel tvModel;
+	
+	TelaTVModel telaAtual;
+	
 	int posicao;
 
-	@PostConstruct
-	private void init() {
-		telas = telaDao.listar();
-		if (!telas.isEmpty()) {
-			telaAtual = telas.get(0);
-			posicao = 0;
+	public void onPageLoad() {
+		try {
+			String strId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("tv");
+			Integer tvId = Integer.parseInt(strId);
+			tvModel = tvDao.consultar(tvId);
+			telas = tvModel.getTelas();
+			if (!telas.isEmpty()) {
+				telaAtual = telas.get(0);
+				posicao = 0;
+			}
+		} catch (Exception e) {
+
 		}
 	}
 
 	public void listener() {
-		telas = telaDao.listar();
 		if (posicao + 1 < telas.size()) {
 			posicao++;
 		} else {
@@ -48,11 +57,11 @@ public class IndexController implements Serializable {
 		}
 	}
 
-	public TelaModel getTelaAtual() {
+	public TelaTVModel getTelaAtual() {
 		return telaAtual;
 	}
 
-	public void setTelaAtual(TelaModel telaAtual) {
+	public void setTelaAtual(TelaTVModel telaAtual) {
 		this.telaAtual = telaAtual;
 	}
 

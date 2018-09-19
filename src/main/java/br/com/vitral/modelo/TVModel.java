@@ -1,17 +1,16 @@
 package br.com.vitral.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import br.com.vitral.entidade.Usuario.TipoUsuario;
-
-public class UsuarioModel implements Serializable {
+public class TVModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String nome;
-	private String senha;
-	private TipoUsuario tipo;
+	private List<TelaTVModel> telas = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -29,25 +28,12 @@ public class UsuarioModel implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getSenha() {
-		return senha;
+	public List<TelaTVModel> getTelas() {
+		return telas;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public TipoUsuario getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoUsuario tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public String toString() {
-		return "UsuarioModel [id=" + id + ", nome=" + nome + ", senha=" + senha + ", tipo=" + tipo + "]";
+	public void setTelas(List<TelaTVModel> telas) {
+		this.telas = telas;
 	}
 
 	@Override
@@ -66,13 +52,18 @@ public class UsuarioModel implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UsuarioModel other = (UsuarioModel) obj;
+		TVModel other = (TVModel) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "TVModel [id=" + id + ", nome=" + nome + ", telas=" + telas + "]";
 	}
 
 }

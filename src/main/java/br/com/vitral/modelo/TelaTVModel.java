@@ -2,7 +2,7 @@ package br.com.vitral.modelo;
 
 import java.io.Serializable;
 
-public class TelaModel implements Serializable {
+public class TelaTVModel implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,7 +33,7 @@ public class TelaModel implements Serializable {
 
 	public void setSegundos(Integer segundos) {
 		this.segundos = segundos;
-	}	
+	}
 
 	public int getPosicao() {
 		return posicao;
@@ -43,11 +43,35 @@ public class TelaModel implements Serializable {
 		this.posicao = posicao;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "TelaModel [id=" + id + ", url=" + url + ", segundos=" + segundos + ", posicao=" + posicao + "]";
+		return url + ", " + segundos + " segundos";
 	}
-	
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TelaTVModel other = (TelaTVModel) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 }

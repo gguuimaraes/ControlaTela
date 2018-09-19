@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<ui:composition template="/template/layoutBase.xhtml">
+
+	<ui:define name="content">
+		<p:commandButton icon="fa fa-fw fa-plus" actionListener="#{tvController.cadastrar}" value="Cadastrar" ajax="true"
+			update="dialogCadastro" style="margin-bottom: 10px" />
+
+		<p:dialog header="Cadastro TV" id="dialogCadastro" widgetVar="dialogCadastro" modal="true">
+			<ui:include src="/sistema/cadastroTV.xhtml" />
+		</p:dialog>
+
+		<h:form id="form">
+			<p:growl id="msgs" showDetail="true" />
+			<p:dataTable id="tvs" var="tv" value="#{tvController.tvs}" editable="true" emptyMessage="Nenhum registro.">
+
+				<p:ajax event="rowEdit" listener="#{tvController.onRowEdit}" update=":form:msgs" />
+				<p:ajax event="rowEditCancel" listener="#{tvController.onRowCancel}" update=":form:msgs" />
+
+				<p:column headerText="Id" style="width: 4%">
+					<h:outputText value="#{tv.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" style="width: 20%">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{tv.nome}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{tv.nome}" maxlength="30" required="true"
+								requiredMessage="O nome é de preenchimento obrigatório" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column headerText="Acesso" style="width: 20%">
+					<p:link target="_blank" outcome="/index.xhtml" value="Link para TV #{tv.id}">
+						<f:param name="tv" value="#{tv.id}" />
+					</p:link>
+				</p:column>
+
+				<p:column headerText="Telas">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{tv.telas.toString().replace('[', '').replace(']', '')}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:dataTable id="telas" widgetVar="telas" value="#{tv.telas}" var="tela" emptyMessage="Nenhum registro."
+								rowIndexVar="rowIndex">
+								<f:facet name="header">
+									<p:commandButton icon="fa fa-fw fa-plus" value="Nova Tela" process="@this"
+										actionListener="#{tvController.adicionarTela(tv)}" update="telas" />
+									<p:commandButton icon="fa fa-fw fa-trash" value="Excluir Todas" process="@this"
+										actionListener="#{tvController.removerTelas(tv)}" update="telas" />
+								</f:facet>
+								<p:column headerText="Posição" style="width: 10%">
+									<div style="height: 100%; width: 100%">
+										<h:outputText value="#{tela.posicao}" />
+										<p:commandLink title="Subir" actionListener="#{tvController.subirTela(tv, tela)}" process="@this"
+											update="telas" style="float: right" rendered="#{rowIndex > 0}">
+											<h:outputText class="fa fa-fw fa-arrow-up" />
+										</p:commandLink>
+										<p:commandLink title="Descer" actionListener="#{tvController.descerTela(tv, tela)}" process="@this"
+											rendered="#{tv.telas.size() - 1 > rowIndex}" update="telas" style="float: right">
+											<h:outputText class="fa fa-fw fa-arrow-down" />
+										</p:commandLink>
+									</div>
+								</p:column>
+								<p:column headerText="URL">
+									<p:inputText value="#{tela.url}" maxlength="255" required="true"
+										requiredMessage="A URL é de preenchimento obrigatório" />
+								</p:column>
+								<p:column headerText="Tempo (segundos)" style="width: 25%">
+									<p:inputText value="#{tela.segundos}" required="true" requiredMessage="O tempo é de preenchimento obrigatório" />
+								</p:column>
+
+								<p:column styleClass="colicone colexcluir"
+									rendered="#{loginController.usuarioAutenticado.tipo == loginController.tipos[0]}">
+									<p:commandLink title="Excluir" process="@this" actionListener="#{tvController.removerTela(tv, tela)}"
+										update="telas">
+										<h:outputText class="ui-icon ui-icon-trash" />
+									</p:commandLink>
+								</p:column>
+							</p:dataTable>
+
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+
+				<p:column styleClass="colicone coleditar">
+					<p:rowEditor editTitle="Editar" cancelTitle="Cancelar" saveTitle="Salvar" />
+				</p:column>
+
+				<p:column styleClass="colicone colexcluir"
+					rendered="#{loginController.usuarioAutenticado.tipo == loginController.tipos[0]}">
+					<p:commandLink title="Excluir" actionListener="#{tvController.excluir(tv)}" update=":form">
+						<h:outputText class="ui-icon ui-icon-trash" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+</html>

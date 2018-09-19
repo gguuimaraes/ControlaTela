@@ -11,17 +11,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name = "tela")
+@Table(name = "telaTV")
 @Entity
 
 @NamedQueries({
 
-		@NamedQuery(name = "Tela.findTela", query = "SELECT t FROM Tela t WHERE t.url = :url"),
-		@NamedQuery(name = "Tela.findAll", query = "SELECT t FROM Tela t ORDER BY t.posicao"),
-		@NamedQuery(name = "Tela.findPorPosicao", query = "SELECT t FROM Tela t WHERE t.posicao = :posicao")
+		@NamedQuery(name = "TelaTV.findTela", query = "SELECT t FROM TelaTV t WHERE t.url = :url"),
+		@NamedQuery(name = "TelaTV.findAll", query = "SELECT t FROM TelaTV t ORDER BY t.posicao"),
+		@NamedQuery(name = "TelaTV.findPorPosicao", query = "SELECT t FROM TelaTV t WHERE t.posicao = :posicao")
 
 })
-public class Tela implements Serializable {
+public class TelaTV implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public class Tela implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "url", unique = true)
+	@Column(name = "url")
 	private String url;
 
 	@Column(name = "segundos")

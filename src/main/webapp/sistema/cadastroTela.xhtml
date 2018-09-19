@@ -2,36 +2,32 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 
 	<h:form>
-
+		<p:messages showDetail="false" closable="true" severity="error">
+			<p:autoUpdate />
+		</p:messages>
 		<h:panelGrid columns="2" cellpadding="10">
 
-			<p:outputLabel value="Id" for="txtId" rendered="#{telaController.telaModel.id != null}" />
-			<p:inputText id="txtId" value="#{telaController.telaModel.id}" style="width:50px" readonly="true"
-				rendered="#{telaController.telaModel.id != null}" />
+			<p:outputLabel value="Id" for="txtId" rendered="#{tvController.telaTVModel.id != null}" />
+			<p:inputText id="txtId" value="#{tvController.telaTVModel.id}" style="width:50px" readonly="true"
+				rendered="#{tvController.telaTVModel.id != null}" />
 
 			<p:outputLabel value="Posição" for="txtPosicao" />
-			<p:inputText id="txtPosicao" value="#{telaController.telaModel.posicao}" style="width:50px" readonly="true" />
+			<p:inputText id="txtPosicao" value="#{tvController.telaTVModel.posicao}" style="width:50px" readonly="true" />
 
 			<p:outputLabel value="URL" for="txtUrl" />
-			<p:inputText id="txtUrl" style="width:300px" maxlength="255" value="#{telaController.telaModel.url}" required="true"
+			<p:inputText id="txtUrl" style="width:300px" maxlength="255" value="#{tvController.telaTVModel.url}" required="true"
 				requiredMessage="A URL é de preenchimento obrigatório" />
 
 			<p:outputLabel value="Tempo (Segundos)" for="txtTempo" />
-			<p:inputText id="txtTempo" style="width:150px" value="#{telaController.telaModel.segundos}" required="true"
+			<p:inputText id="txtTempo" style="width:150px" value="#{tvController.telaTVModel.segundos}" required="true"
 				requiredMessage="O tempo é de preenchimento obrigatório" />
 
-			<p:spacer />
-
-			<p:commandButton value="Salvar" id="btnSalvar" icon="fa fa-fw fa-save" actionListener="#{telaController.salvar}"
-				update="form" />
-
-			<p:spacer />
-			<p:messages showDetail="false" closable="true" severity="error">
-				<p:autoUpdate />
-			</p:messages>
-
 		</h:panelGrid>
-
+		
+		<h:panelGrid columns="1" cellpadding="10">
+			<p:commandButton value="Adicionar" id="btnAdicionar" icon="fa fa-fw fa-plus"
+				actionListener="#{tvController.criarTela}" update="form" />
+		</h:panelGrid>
 	</h:form>
 
 </ui:composition>

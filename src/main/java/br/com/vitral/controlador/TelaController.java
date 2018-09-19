@@ -12,7 +12,7 @@ import javax.inject.Named;
 import org.primefaces.PrimeFaces;
 import org.primefaces.event.RowEditEvent;
 
-import br.com.vitral.modelo.TelaModel;
+import br.com.vitral.modelo.TelaTVModel;
 import br.com.vitral.persistencia.TelaDao;
 import br.com.vitral.util.Uteis;
 
@@ -23,13 +23,13 @@ public class TelaController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private TelaModel telaModel;
+	private TelaTVModel telaModel;
 
 	@Inject
 	private TelaDao telaDao;
 
 	@Produces
-	private List<TelaModel> telas;
+	private List<TelaTVModel> telas;
 
 	@PostConstruct
 	public void init() {
@@ -37,7 +37,7 @@ public class TelaController implements Serializable {
 	}
 
 	public void cadastrar() {
-		telaModel = new TelaModel();
+		telaModel = new TelaTVModel();
 		init();
 		telaModel.setPosicao(telas.size() + 1);
 		PrimeFaces.current().executeScript("PF('dialogCadastro').show();");
@@ -46,22 +46,22 @@ public class TelaController implements Serializable {
 	public void salvar() {
 		telaDao.salvar(telaModel);
 		init();
-		this.telaModel = new TelaModel();
+		this.telaModel = new TelaTVModel();
 		PrimeFaces.current().executeScript("PF('dialogCadastro').hide();");
 		Uteis.messageInformation("Tela cadastrada com sucesso");
 	}
 
-	public void excluir(TelaModel telaModel) {
+	public void excluir(TelaTVModel telaModel) {
 		telaDao.remover(telaModel.getId());
 		init();
 	}
 
-	public List<TelaModel> getTelas() {
+	public List<TelaTVModel> getTelas() {
 		return telas;
 	}
 
 	public void onRowEdit(RowEditEvent event) {
-		telaDao.salvar((TelaModel) event.getObject());
+		telaDao.salvar((TelaTVModel) event.getObject());
 		Uteis.messageInformation("Tela alterada com sucesso");
 	}
 
@@ -69,11 +69,11 @@ public class TelaController implements Serializable {
 		Uteis.messageInformation("Operação cancelada");
 	}
 
-	public TelaModel getTelaModel() {
+	public TelaTVModel getTelaModel() {
 		return this.telaModel;
 	}
 
-	public void setTelaModel(TelaModel telaModel) {
+	public void setTelaModel(TelaTVModel telaModel) {
 		this.telaModel = telaModel;
 	}
 

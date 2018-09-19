@@ -9,27 +9,27 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import br.com.vitral.entidade.Tela;
-import br.com.vitral.modelo.TelaModel;
+import br.com.vitral.entidade.TelaTV;
+import br.com.vitral.modelo.TelaTVModel;
 import br.com.vitral.util.Uteis;
 
 public class TelaDao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Inject
-	Tela tela;
+	TelaTV tela;
 	transient EntityManager em;
 
-	public void salvar(TelaModel telaModel) {
+	public void salvar(TelaTVModel telaModel) {
 		em = Uteis.getEntityManager();
 		if (telaModel.getId() == null) {
-			tela = new Tela();
+			tela = new TelaTV();
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
 			tela.setPosicao(telaModel.getPosicao());
 			em.persist(tela);
 		} else {
-			tela = em.find(Tela.class, telaModel.getId());
+			tela = em.find(TelaTV.class, telaModel.getId());
 			tela.setUrl(telaModel.getUrl());
 			tela.setSegundos(telaModel.getSegundos());
 			tela.setPosicao(telaModel.getPosicao());
@@ -37,15 +37,15 @@ public class TelaDao implements Serializable {
 		}
 	}
 
-	public List<TelaModel> listar() {
-		List<TelaModel> telasModel = new ArrayList<>();
+	public List<TelaTVModel> listar() {
+		List<TelaTVModel> telasModel = new ArrayList<>();
 		em = Uteis.getEntityManager();
-		Query query = em.createNamedQuery("Tela.findAll");
+		Query query = em.createNamedQuery("TelaTV.findAll");
 		@SuppressWarnings("unchecked")
-		Collection<Tela> telas = (Collection<Tela>) query.getResultList();
-		TelaModel telaModel = null;
-		for (Tela t : telas) {
-			telaModel = new TelaModel();
+		Collection<TelaTV> telas = (Collection<TelaTV>) query.getResultList();
+		TelaTVModel telaModel = null;
+		for (TelaTV t : telas) {
+			telaModel = new TelaTVModel();
 			telaModel.setId(t.getId());
 			telaModel.setUrl(t.getUrl());
 			telaModel.setSegundos(t.getSegundos());
@@ -57,8 +57,8 @@ public class TelaDao implements Serializable {
 
 	public void remover(int id) {
 		em = Uteis.getEntityManager();
-		em.remove(em.find(Tela.class, id));
-		List<Tela> l = em.createNamedQuery("Tela.findAll").getResultList();
+		em.remove(em.find(TelaTV.class, id));
+		List<TelaTV> l = em.createNamedQuery("TelaTV.findAll").getResultList();
 		if (l.size() == 1) {
 			l.get(0).setPosicao(1);
 			em.merge(l.get(0));
@@ -73,7 +73,7 @@ public class TelaDao implements Serializable {
 		trocarPosicao(consultarPorPosicao(posicao), consultarPorPosicao(posicao + 1));
 	}
 
-	private void trocarPosicao(Tela tela, Tela outra) {
+	private void trocarPosicao(TelaTV tela, TelaTV outra) {
 		int aux = outra.getPosicao();
 		outra.setPosicao(tela.getPosicao());
 		tela.setPosicao(aux);
@@ -82,8 +82,8 @@ public class TelaDao implements Serializable {
 		em.merge(outra);
 	}
 
-	private Tela consultarPorPosicao(int posicao) {
-		return (Tela) Uteis.getEntityManager().createNamedQuery("Tela.findPorPosicao").setParameter("posicao", posicao)
+	private TelaTV consultarPorPosicao(int posicao) {
+		return (TelaTV) Uteis.getEntityManager().createNamedQuery("TelaTV.findPorPosicao").setParameter("posicao", posicao)
 				.getSingleResult();
 	}
 
