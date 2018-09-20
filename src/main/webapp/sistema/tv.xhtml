@@ -41,7 +41,7 @@
 				</p:column>
 
 				<p:column headerText="Acesso" style="width: 20%">
-					<p:link target="_blank" outcome="/index.xhtml" value="Link para TV #{tv.id}">
+					<p:link target="_blank" outcome="/vertv.xhtml" value="Link para TV #{tv.id}">
 						<f:param name="tv" value="#{tv.id}" />
 					</p:link>
 				</p:column>
@@ -81,8 +81,7 @@
 									<p:inputText value="#{tela.segundos}" required="true" requiredMessage="O tempo é de preenchimento obrigatório" />
 								</p:column>
 
-								<p:column styleClass="colicone colexcluir"
-									rendered="#{loginController.usuarioAutenticado.tipo == loginController.tipos[0]}">
+								<p:column styleClass="colicone colexcluir">
 									<p:commandLink title="Excluir" process="@this" actionListener="#{tvController.removerTela(tv, tela)}"
 										update="telas">
 										<h:outputText class="ui-icon ui-icon-trash" />
