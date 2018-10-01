@@ -6,8 +6,10 @@ import br.com.vitral.entidade.Usuario.TipoUsuario;
 
 public class UsuarioModel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2073567802498857228L;
 	private Integer id;
 	private String nome;
 	private String senha;

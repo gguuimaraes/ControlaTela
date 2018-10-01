@@ -21,7 +21,11 @@ import br.com.vitral.util.Uteis;
 @SessionScoped
 public class TVController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4894305127105122863L;
 
 	private TVModel tvModel;
 

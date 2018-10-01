@@ -5,7 +5,7 @@
 		<p:messages showDetail="false" closable="true" severity="error">
 			<p:autoUpdate />
 		</p:messages>
-		<h:panelGrid columns="2" cellpadding="10">
+		<h:panelGrid columns="2" cellpadding="4">
 			<p:outputLabel value="Id" for="txtId" rendered="#{tvController.tvModel.id != null}" />
 			<p:inputText id="txtId" value="#{tvController.tvModel.id}" style="width:50px" readonly="true"
 				rendered="#{tvController.tvModel.id != null}" />
@@ -14,8 +14,8 @@
 			<p:inputText id="txtNome" maxlength="30" value="#{tvController.tvModel.nome}" required="true"
 				requiredMessage="O nome é de preenchimento obrigatório" />
 		</h:panelGrid>
-		<h:panelGrid columns="1" cellpadding="10">
-			<p:commandButton value="Salvar" id="btnSalvar" icon="fa fa-fw fa-plus" actionListener="#{tvController.salvar}"
+		<h:panelGrid columns="1" cellpadding="4">
+			<p:commandButton value="Salvar" id="btnSalvar" icon="fa fa-fw fa-save" actionListener="#{tvController.salvar}"
 				update="form" />
 		</h:panelGrid>
 	</h:form>

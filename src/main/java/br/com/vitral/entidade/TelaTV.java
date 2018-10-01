@@ -23,7 +23,11 @@ import javax.persistence.Table;
 })
 public class TelaTV implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8525170161748048510L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,7 +15,10 @@ import br.com.vitral.persistencia.TVDao;
 @SessionScoped
 public class VerTVController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1735449721857742276L;
 
 	@Inject
 	private TVDao tvDao;

@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.vitral.entidade.TV;
@@ -18,7 +17,11 @@ import br.com.vitral.util.Uteis;
 
 public class TVDao implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5260861235067025995L;
 
 	@Inject
 	TV tv;

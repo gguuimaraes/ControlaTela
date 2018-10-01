@@ -5,7 +5,7 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<h:outputStylesheet library="css" name="default.css" />
-	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/imagens/favicon.ico"/>
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/imagens/favicon.ico" />
 	<title>Controla Tela</title>
 </h:head>
 
@@ -23,7 +23,8 @@
 				<p:password id="txtSenha" value="#{loginController.usuarioModel.senha}" style="width: calc(100% - 10px)" />
 			</h:panelGrid>
 			<h:panelGrid cellpadding="10">
-				<p:commandButton value="Acessar" id="btnAcessar" icon="fa fa-fw fa-sign-in" action="#{loginController.login}" update="msg" />
+				<p:commandButton value="Acessar" id="btnAcessar" icon="fa fa-fw fa-sign-in" action="#{loginController.login}"
+					update="msg" />
 			</h:panelGrid>
 		</p:panel>
 	</h:form>

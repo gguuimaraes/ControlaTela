@@ -6,8 +6,11 @@ import java.util.List;
 
 public class TVModel implements Serializable {
 
-	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5899306157739093854L;
 	private Integer id;
 	private String nome;
 	private List<TelaTVModel> telas = new ArrayList<>();

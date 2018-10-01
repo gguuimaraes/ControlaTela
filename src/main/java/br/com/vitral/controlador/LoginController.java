@@ -19,7 +19,10 @@ import br.com.vitral.util.Uteis;
 @SessionScoped
 public class LoginController implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2912288554342525190L;
 
 	@Inject
 	private UsuarioModel usuarioModel;
@@ -72,4 +75,5 @@ public class LoginController implements Serializable {
 	public void setUsuarioModel(UsuarioModel usuarioModel) {
 		this.usuarioModel = usuarioModel;
 	}
+
 }
