@@ -8,25 +8,37 @@ html, body {
 	height: 100%;
 }
 
-#content {
+.table {
+	display: table;
+}
+
+.table-row {
+	display: table-row;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.body {
+	height: 100%;
+}
+
+.body-content-wrapper {
+	width: 100%;
+	height: 100%;
 	position: relative;
 }
 
-#header {
-	padding: 0px;
-}
-
-#body {
-	padding: 10px;
-	padding-bottom: 60px;
-}
-
-#footer {
+.body-content {
 	position: absolute;
+	top: 0;
 	bottom: 0;
-	width: 100%;
-	height: 20px;
-	background: #BDBDBD;
+	left: 0;
+	right: 0;
+	overflow: auto;
+	padding: 10px
 }
 
 .colicone span {
@@ -84,9 +96,4 @@ html, body {
 
 .ui-cell-editor .ui-cell-editor-input input {
 	width: calc(100% - 11px) !important;
-}
-
-span.ui-menuitem-icon.ui-icon.fa.fa-fw.fa-desktop {
-	margin-top: 1px;
-	margin-right: 2px;
 }

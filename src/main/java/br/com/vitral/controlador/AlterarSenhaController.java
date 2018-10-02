@@ -1,11 +1,14 @@
 package br.com.vitral.controlador;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.PrimeFaces;
 
 import br.com.vitral.entidade.Usuario;
 import br.com.vitral.modelo.UsuarioModel;
@@ -43,7 +46,7 @@ public class AlterarSenhaController implements Serializable {
 		this.nova = nova;
 	}
 
-	public String alterar() {
+	public void alterar() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		UsuarioModel usuarioModel = (UsuarioModel) facesContext.getExternalContext().getSessionMap()
 				.get("usuarioAutenticado");
@@ -54,11 +57,13 @@ public class AlterarSenhaController implements Serializable {
 			usuarioDao.salvar(usuarioModel);
 			usuarioModel.setSenha(null);
 			Uteis.message("Senha alterada com sucesso!");
-			return "sistema/home?faces-redirect=true";
+			PrimeFaces.current().executeScript("PF('poll').start()");	
 		} else {
 			Uteis.message("Senha antiga inválida");
-			return "";
 		}
 	}
 
+	public void redirecionar() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
+	}
 }
